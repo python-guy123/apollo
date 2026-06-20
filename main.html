@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ApolloOS</title>
+    <!-- Cool fonts that a 14yo might like -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@400;600&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div id="top-bar">
+        <div id="os-name">Apollo_OS_v1.0</div>
+        <div id="clock">12:00 AM</div>
+        <div id="top-right">
+            <span>[Wi-Fi]</span>
+            <span>[100%]</span>
+        </div>
+    </div>
+    
+    <div id="desktop">
+        <!-- Desktop Icons -->
+        <div class="desktop-icon" id="icon-welcome" ondblclick="openWindow('welcome-card')">
+            <div class="icon-img welcome-icon-img">W</div>
+            <span>Welcome</span>
+        </div>
+        <div class="desktop-icon" id="icon-terminal" ondblclick="openWindow('terminal-window')">
+            <div class="icon-img terminal-icon-img">
+                <img src="terminal.png" alt="Terminal" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </div>
+            <span>Terminal</span>
+        </div>
+        <div class="desktop-icon" id="icon-notes" ondblclick="openWindow('notes-window')">
+            <div class="icon-img notes-icon-img">📝</div>
+            <span>Notes Pro Max</span>
+        </div>
+        <div class="desktop-icon" id="icon-browser" ondblclick="openWindow('browser-window')">
+            <div class="icon-img" style="background: #fff; color: #007aff; border-radius: 50%;">🌐</div>
+            <span>Browser</span>
+        </div>
+        <div class="desktop-icon" id="icon-paint" ondblclick="openWindow('paint-window')">
+            <div class="icon-img" style="background: linear-gradient(to bottom right, #ff9a9e, #fecfef);">🎨</div>
+            <span>Paint</span>
+        </div>
+        <div class="desktop-icon" id="icon-pong" ondblclick="openWindow('pong-window')">
+            <div class="icon-img" style="background: #000; color: #fff; border: 2px solid #fff;">🏓</div>
+            <span>Pong</span>
+        </div>
+        <div class="desktop-icon" id="icon-settings" ondblclick="openWindow('settings-window')">
+            <div class="icon-img" style="background: #333; color: #fff; border: 2px solid #aaa;">⚙️</div>
+            <span>Settings</span>
+        </div>
+
+        <!-- Terminal Window -->
+        <div id="terminal-window" class="window panel" style="display: none; top: 120px; left: 150px; width: 600px; height: 350px;">
+            <div class="window-header" id="terminal-window-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('terminal-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Terminal</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-text">
+                    <div id="terminal-output">
+                        <p>ApolloOS v1.0 [Version 1.0.0]</p>
+                        <p>(c) 2026 the world. All rights reserved.</p>
+                        <br>
+                    </div>
+                    <div class="terminal-line" id="terminal-input-line">
+                        <span class="prompt">user@apollo:~$</span>
+                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Window -->
+        <div id="notes-window" class="window panel" style="display: none; top: 100px; left: 200px; width: 700px; height: 450px; padding: 0;">
+            <div class="window-header" id="notes-window-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('notes-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Notes Pro Max</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="notes-container">
+                <div class="notes-sidebar">
+                    <div class="notes-sidebar-title">Apollo Notes</div>
+                    <ul class="notes-list" id="notes-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                <div class="notes-main">
+                    <div class="notes-toolbar">
+                        <button class="notes-btn" onclick="newNote()" title="New Note">✏️</button>
+                        <button class="notes-btn" onclick="deleteNote()" title="Delete Note">🗑️</button>
+                    </div>
+                    <textarea id="notes-editor" class="notes-editor" oninput="saveCurrentNote()"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Card -->
+        <div id="welcome-card" class="window panel">
+            <div class="window-header" id="welcome-card-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('welcome-card')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Welcome_To_Apollo.exe</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="window-content">
+                <h1 class="glow-text">Welcome to Apollo OS</h1>
+                <p class="subtitle">Disclaimer: This may or may not be a complete OS...</p>
+                <div class="image-container">
+                    <img src="image.png" alt="Apollo OS Preview">
+                </div>
+                <div class="link-container">
+                    <a href="https://hab8.in" target="_blank" class="cool-btn">Here's My Website!</a>
+                </div>
+                <p class="description">In this website, we will be seeing the progression of Apollo OS from a simple HTML page to an <strong>OPERATING SYSTEM</strong> (kinda).</p>
+            </div>
+        </div>
+
+        <!-- Browser Window -->
+        <div id="browser-window" class="window panel" style="display: none; top: 50px; left: 100px; width: 800px; height: 500px; padding: 0;">
+            <div class="window-header" id="browser-window-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('browser-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Apollo Surf</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="browser-toolbar">
+                <button class="browser-btn" onclick="document.getElementById('browser-frame').src = document.getElementById('browser-frame').src">↻</button>
+                <input type="text" id="browser-url" value="https://en.wikipedia.org" onkeydown="if(event.key==='Enter') navigateBrowser()">
+                <button class="browser-btn" onclick="navigateBrowser()">Go</button>
+            </div>
+            <iframe id="browser-frame" src="https://en.wikipedia.org"></iframe>
+        </div>
+
+        <!-- Paint Window -->
+        <div id="paint-window" class="window panel" style="display: none; top: 70px; left: 120px; width: 700px; height: 500px; padding: 0; background: #f5f5f7;">
+            <div class="window-header" id="paint-window-header" style="background: rgba(255,255,255,0.8); border-bottom: 1px solid #d2d2d7;">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('paint-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title" style="color: #1d1d1f; font-family: -apple-system, sans-serif; font-weight: 500;">Apollo Canvas</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="paint-container">
+                <canvas id="paint-canvas" width="700" height="460"></canvas>
+                <div class="paint-toolbar-apple">
+                    <div class="paint-tool color-btn" style="background: #000;" onclick="setPaintColor('#000')"></div>
+                    <div class="paint-tool color-btn" style="background: #ff3b30;" onclick="setPaintColor('#ff3b30')"></div>
+                    <div class="paint-tool color-btn" style="background: #34c759;" onclick="setPaintColor('#34c759')"></div>
+                    <div class="paint-tool color-btn" style="background: #007aff;" onclick="setPaintColor('#007aff')"></div>
+                    <div class="paint-divider"></div>
+                    <button class="paint-tool action-btn" onclick="setPaintSize(2)">S</button>
+                    <button class="paint-tool action-btn" onclick="setPaintSize(5)">M</button>
+                    <button class="paint-tool action-btn" onclick="setPaintSize(10)">L</button>
+                    <div class="paint-divider"></div>
+                    <button class="paint-tool action-btn" onclick="setPaintColor('#f5f5f7')">Eraser</button>
+                    <button class="paint-tool action-btn text-danger" onclick="clearCanvas()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pong Window -->
+        <div id="pong-window" class="window panel" style="display: none; top: 90px; left: 140px; width: 600px; height: 440px; padding: 0; background: #000;">
+            <div class="window-header" id="pong-window-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('pong-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Pong</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="pong-container">
+                <div id="pong-score">0 - 0</div>
+                <canvas id="pong-canvas" width="600" height="400"></canvas>
+            </div>
+        </div>
+
+        <!-- Settings Window -->
+        <div id="settings-window" class="window panel" style="display: none; top: 110px; left: 160px; width: 500px; height: 400px; padding: 0;">
+            <div class="window-header" id="settings-window-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('settings-window')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Settings</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="settings-content" style="padding: 20px; overflow-y: auto; height: calc(100% - 40px); box-sizing: border-box;">
+                <h2 style="margin-top:0;">Personalization</h2>
+                
+                <h3>Theme Packages</h3>
+                <div class="settings-grid">
+                    <div class="settings-card" onclick="applyPackage('apollo')">Apollo OS</div>
+                    <div class="settings-card" onclick="applyPackage('macos')">MacOS-Esque</div>
+                    <div class="settings-card" onclick="applyPackage('cyberpunk')">Spacepunk</div>
+                    <div class="settings-card" onclick="applyPackage('hacker')">The Matrix</div>
+                </div>
+
+                <h3>Wallpaper</h3>
+                <div class="settings-grid">
+                    <div class="settings-card" onclick="setWallpaper('grid')">Classic Grid</div>
+                    <div class="settings-card" onclick="setWallpaper('macos')">MacOS Golden Gate</div>
+                    <div class="settings-card" onclick="setWallpaper('matrix')">Matrix Rain</div>
+                    <div class="settings-card" onclick="setWallpaper('space')">Deep Space</div>
+                </div>
+
+                <h3>Color Theme</h3>
+                <div class="settings-grid">
+                    <div class="settings-card" onclick="setTheme('#66fcf1', '#45a29e', '#0b0c10')">Apollo Neon</div>
+                    <div class="settings-card" onclick="setTheme('#ff00ff', '#00ffff', '#110011')">Cyberpunk</div>
+                    <div class="settings-card" onclick="setTheme('#007aff', '#34c759', '#e5e5ea', true)">Light Mode</div>
+                    <div class="settings-card" onclick="setTheme('#00ff00', '#00cc00', '#000000')">Hacker Green</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Card -->
+        <div id="welcome-card" class="window panel">
+            <div class="window-header" id="welcome-card-header">
+                <div class="window-controls">
+                    <button class="win-btn close" onclick="closeWindow('welcome-card')"></button>
+                    <button class="win-btn min"></button>
+                    <button class="win-btn max"></button>
+                </div>
+                <div class="window-title">Welcome_To_Apollo.exe</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="window-content">
+                <h1 class="glow-text">Welcome to Apollo OS</h1>
+                <p class="subtitle">Disclaimer: This may or may not be a complete OS...</p>
+                <div class="image-container">
+                    <img src="image.png" alt="Apollo OS Preview">
+                </div>
+                <div class="link-container">
+                    <a href="https://hab8.in" target="_blank" class="cool-btn">Here's My Website!</a>
+                </div>
+                <p class="description">In this website, we will be seeing the progression of Apollo OS from a simple HTML page to an <strong>OPERATING SYSTEM</strong> (kinda).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="panel" style="display: none;">
+        <div class="menu-header">MENU</div>
+        <ul>
+            <li class="menu-label">-- PROGRAMS --</li>
+            <li onclick="openWindow('welcome-card'); document.getElementById('start-menu').style.display='none';">Welcome Card</li>
+            <li onclick="openWindow('terminal-window'); document.getElementById('start-menu').style.display='none';">Terminal</li>
+            <li onclick="openWindow('notes-window'); document.getElementById('start-menu').style.display='none';">Notes Pro Max</li>
+            <li onclick="openWindow('browser-window'); document.getElementById('start-menu').style.display='none';">Apollo Surf</li>
+            <li onclick="openWindow('paint-window'); document.getElementById('start-menu').style.display='none';">Apollo Canvas</li>
+            <li onclick="openWindow('pong-window'); document.getElementById('start-menu').style.display='none';">Pong</li>
+            <li class="menu-divider"></li>
+            <li>Documents</li>
+            <li onclick="openWindow('settings-window'); document.getElementById('start-menu').style.display='none';">Settings</li>
+            <li class="danger" onclick="powerOff()">Shut Down</li>
+        </ul>
+    </div>
+
+    <!-- Floating Dock -->
+    <div id="dock-container">
+        <div id="dock" class="panel">
+            <div id="start-btn" class="dock-item">
+                <div class="dock-icon apollo-icon">A</div>
+                <span>Start</span>
+            </div>
+            <div class="dock-separator"></div>
+            <div class="dock-item" onclick="openWindow('welcome-card')">
+                <div class="dock-icon welcome-icon">W</div>
+                <span>Welcome</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('terminal-window')">
+                <div class="dock-icon terminal-icon" style="padding:0; overflow:hidden; border: 2px solid var(--neon-blue); background: #1f2833;">
+                    <img src="terminal.png" alt="Terminal" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span>Terminal</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('notes-window')">
+                <div class="dock-icon notes-icon" style="background: linear-gradient(135deg, #fde047, #f59e0b); color: white; border: 2px solid white; font-size: 24px;">📝</div>
+                <span>Notes</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('browser-window')">
+                <div class="dock-icon" style="background: #fff; color: #007aff; border-radius: 50%; border: 2px solid #007aff; font-size: 24px;">🌐</div>
+                <span>Surf</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('paint-window')">
+                <div class="dock-icon" style="background: linear-gradient(to bottom right, #ff9a9e, #fecfef); font-size: 24px;">🎨</div>
+                <span>Canvas</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('pong-window')">
+                <div class="dock-icon" style="background: #000; color: #fff; border: 2px solid #fff; font-size: 24px;">🏓</div>
+                <span>Pong</span>
+            </div>
+            <div class="dock-item" onclick="openWindow('settings-window')">
+                <div class="dock-icon" style="background: #333; color: #fff; border: 2px solid #aaa; font-size: 24px;">⚙️</div>
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shutdown Screen -->
+    <div id="shutdown-screen" style="display: none;">
+        <div class="power-btn" onclick="powerOn()">
+            <div class="power-icon">⏻</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
